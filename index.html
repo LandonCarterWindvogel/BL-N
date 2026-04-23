@@ -248,6 +248,18 @@
       transition: border-color .2s, background .2s;
     }
     .area-pill:hover { border-color: rgba(245,166,35,.4); background: rgba(245,166,35,.06); }
+
+    /* ── Logo ring ── */
+    .logo-ring {
+      background: rgba(245,166,35,.12);
+      border: 1.5px solid rgba(245,166,35,.35);
+      border-radius: 12px;
+      width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background .2s, border-color .2s;
+    }
+    a:hover .logo-ring { background: rgba(245,166,35,.2); border-color: rgba(245,166,35,.55); }
   </style>
 </head>
 <body class="antialiased">
@@ -261,8 +273,14 @@
 
     <!-- Logo -->
     <a href="#" aria-label="BL&amp;N Electrical &amp; Plumbing – home" class="flex items-center gap-3">
-      <img src="assets/logo.png" alt="BL&amp;N Electrical &amp; Plumbing logo" width="36" height="36"
-           class="w-9 h-9 rounded-lg object-contain flex-shrink-0" />
+      <div class="logo-ring">
+        <img src="assets/logo.png" alt="" width="28" height="28"
+             class="w-7 h-7 object-contain" aria-hidden="true" />
+      </div>
+      <div class="leading-none">
+        <span class="font-display font-800 text-white tracking-tight" style="font-size:1.2rem;line-height:1;">BL<span class="text-amber-400">&amp;</span>N</span>
+        <span class="block font-body text-white/45 uppercase tracking-widest mt-0.5" style="font-size:9px;">Electrical &amp; Plumbing</span>
+      </div>
     </a>
 
     <!-- Desktop nav -->
@@ -975,8 +993,14 @@
       <!-- Brand -->
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <img src="assets/logo.png" alt="" width="36" height="36"
-               class="w-9 h-9 rounded-lg object-contain flex-shrink-0" aria-hidden="true" />
+          <div class="logo-ring" style="width:40px;height:40px;">
+            <img src="assets/logo.png" alt="" width="26" height="26"
+                 class="object-contain" aria-hidden="true" style="width:26px;height:26px;" />
+          </div>
+          <div class="leading-none">
+            <span class="font-display font-800 text-white tracking-tight" style="font-size:1.1rem;line-height:1;">BL<span class="text-amber-400">&amp;</span>N</span>
+            <span class="block font-body text-white/40 uppercase tracking-widest mt-0.5" style="font-size:9px;">Electrical &amp; Plumbing</span>
+          </div>
         </div>
         <p class="text-white/40 text-xs font-body leading-relaxed">
           Your trusted local trade professionals for electrical repairs, plumbing services, and property maintenance across Plettenberg Bay and the Garden Route.
@@ -1227,7 +1251,6 @@
     formError.textContent = msg;
     formError.classList.remove('hidden');
     formSuccess.classList.add('hidden');
-    /* Mark relevant fields invalid for a11y */
     ['fname','fphone','fservice','fmessage'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el && !el.value.trim()) el.setAttribute('aria-invalid', 'true');
