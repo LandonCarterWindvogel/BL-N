@@ -1,6 +1,5 @@
+# Security headers — https://docs.netlify.com/manage/routing/headers/
 /*
-  This file intentionally contains no comments because Netlify's _headers parser treats unsupported comment syntax as rules.
-*/
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
