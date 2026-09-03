@@ -1,51 +1,63 @@
 # BL&N Electrical & Plumbing
 
-> A conversion-focused website for a local electrical and plumbing contractor serving Plettenberg Bay and the surrounding Garden Route.
-
-## Overview
-
-This project is a client-facing website rebuild focused on making a local service business easier to understand, easier to contact and easier to discover through search.
+A fast, conversion-focused website for BL&N Electrical & Plumbing in Plettenberg Bay, Western Cape.
 
 **Live site:** https://bl-n-site.netlify.app/
 
-## What I built
+## Purpose
 
-- Responsive website design and implementation
-- Service-led information architecture
-- Tabbed service presentation
-- Filterable project/job gallery
-- Emergency call-out messaging
-- Dedicated holiday-home maintenance offering for Airbnb/property owners
-- Mobile-first layouts and interaction patterns
-- Local SEO foundations
-- Structured data / schema markup
-- Netlify deployment
-- Vanilla HTML, CSS and JavaScript
+The site is designed around the way a local trade customer actually behaves: identify the service, understand the offering, establish confidence, and make contact quickly.
 
-## Design goals
+## Highlights
 
-The site is built around a simple conversion journey:
+- Fully responsive, mobile-first layout
+- Strong call / WhatsApp / quote actions throughout the journey
+- Dedicated electrical, plumbing and property-maintenance service sections
+- Clear three-step service process
+- Local service-area coverage content
+- Netlify-compatible quote form with honeypot spam protection
+- Semantic HTML and keyboard-accessible controls
+- Reduced-motion support
+- Vanilla CSS and modern JavaScript with no frontend framework
+- Local SEO metadata, Open Graph tags and Schema.org LocalBusiness data
+- Netlify security headers including a same-origin Content Security Policy
+- Long-lived caching for static assets
 
-**Need a service → understand the offering → trust the business → make contact.**
+## Structure
 
-The interface avoids unnecessary complexity and keeps contact actions visible, especially for mobile users searching for urgent help.
+```text
+/
+├── index.html
+├── robots.txt
+├── sitemap.xml
+├── _headers
+└── assets/
+    ├── favicon.png
+    ├── favicon_t.png
+    ├── logo.png
+    ├── logo_w.png
+    ├── name
+    ├── site.css
+    └── site.js
+```
+
+## Deployment
+
+The repository is intentionally static so it can deploy directly through GitHub + Netlify with no build step.
+
+For a future custom domain, update the canonical URL, Open Graph URL/image paths, `robots.txt` sitemap URL and the Schema.org `url`/`@id` values in `index.html`.
 
 ## Technology
 
 - Semantic HTML5
 - CSS3
-- Modern JavaScript
-- Responsive / mobile-first design
-- Local SEO
+- Modern ES6+ JavaScript
+- Netlify Forms
 - Schema.org structured data
-- Netlify
+- Netlify `_headers`
 
 ## Project status
 
-**Client work — live**
+**Client website — production-ready static build**
 
-This is a commercial website built for a real local business. The project demonstrates my approach to taking a business requirement and turning it into a practical, conversion-focused website.
-
-## Notes
-
-This project is part of my client portfolio. It is intentionally lightweight and framework-free, with emphasis on maintainability, performance, accessibility and clear business outcomes.
+The implementation keeps the existing BL&N branding assets while replacing the previous single-file Tailwind CDN approach with a cleaner, self-contained frontend architecture focused on speed, accessibility, maintainability and conversion.
