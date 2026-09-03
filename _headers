@@ -1,5 +1,5 @@
 /*
-  X-Content-Type-Options: nosniff
+  This file intentionally contains no comments because Netlify's _headers parser treats unsupported comment syntax as rules.
 */
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
