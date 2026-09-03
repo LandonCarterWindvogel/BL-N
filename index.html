@@ -1,1311 +1,306 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- ── Primary SEO ── -->
-  <title>BL&N Electrical &amp; Plumbing | Plettenberg Bay</title>
-  <meta name="description" content="Professional electrical repairs, plumbing services and property maintenance in Plettenberg Bay. Fast response, transparent pricing, and locally trusted tradespeople. Call 082 509 8950." />
-  <link rel="canonical" href="https://bl-n-site.netlify.app/" />
-
-  <!-- ── Open Graph ── -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://bl-n-site.netlify.app/" />
-  <meta property="og:site_name"   content="BL&N Electrical &amp; Plumbing" />
-  <meta property="og:title"       content="BL&N Electrical &amp; Plumbing | Plettenberg Bay" />
-  <meta property="og:description" content="Fast, reliable electrical and plumbing services in Plettenberg Bay, South Africa. Licensed professionals, same-day response, workmanship guarantee." />
-  <meta property="og:image"       content="https://bl-n-site.netlify.app/assets/logo.png" />
-
-  <!-- ── Twitter Card ── -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="BL&N Electrical &amp; Plumbing | Plettenberg Bay" />
-  <meta name="twitter:description" content="Fast, reliable electrical and plumbing services in Plettenberg Bay, South Africa." />
-
-  <!-- ── Browser / PWA ── -->
-  <meta name="theme-color" content="#0B1F3A" />
-  <meta name="robots"      content="index, follow" />
-
-  <!-- ── Favicon ── -->
-  <link rel="icon"            type="image/png" sizes="32x32" href="assets/favicon.png" />
-  <link rel="shortcut icon"                                  href="assets/favicon.png" />
-  <link rel="apple-touch-icon"                               href="assets/favicon.png" />
-
-  <!-- ── Fonts ── -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
-
-  <!-- ── Tailwind CDN ── -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Barlow Condensed', 'sans-serif'],
-            body:    ['DM Sans', 'sans-serif'],
-          },
-          fontWeight: {
-            '500': '500',
-            '600': '600',
-            '700': '700',
-            '800': '800',
-          },
-          colors: {
-            navy: {
-              950: '#030810',
-              900: '#060F1C',
-              800: '#0B1F3A',
-              700: '#0D2545',
-              600: '#122D54',
-            },
-            amber: {
-              400: '#FFB830',
-              500: '#F5A623',
-              600: '#E09510',
-            },
-            sky: {
-              400: '#38BDF8',
-              500: '#1A8FD1',
-            },
-          },
-        },
-      },
-    };
-  </script>
-
-  <style>
-    /* ── Reset & base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body { font-family: 'DM Sans', sans-serif; background: #060F1C; color: #fff; line-height: 1.6; }
-
-    /* ── Skip link ── */
-    .skip-link {
-      position: absolute; top: -100%; left: 1rem; z-index: 999;
-      background: #F5A623; color: #060F1C; font-weight: 700;
-      padding: .5rem 1rem; border-radius: 0 0 .5rem .5rem;
-      transition: top .2s;
-    }
-    .skip-link:focus { top: 0; }
-
-    /* ── Scrolled nav ── */
-    #navbar { transition: background .3s, box-shadow .3s; }
-    #navbar.scrolled { background: rgba(6,15,28,.97); box-shadow: 0 2px 24px rgba(0,0,0,.45); }
-
-    /* ── Hero background ── */
-    .hero-bg {
-      background: linear-gradient(150deg, #060F1C 0%, #0B1F3A 55%, #0D2545 100%);
-      position: relative; overflow: hidden;
-    }
-    .hero-bg::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 65% 55% at 75% 45%, rgba(245,166,35,.10) 0%, transparent 68%);
-      pointer-events: none;
-    }
-    .hero-grid {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 48px 48px;
-    }
-
-    /* ── Ambient orb ── */
-    .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(80px); pointer-events: none;
-    }
-    .orb-amber { width: 520px; height: 520px; background: rgba(245,166,35,.07); top: -100px; right: -100px; }
-    .orb-sky   { width: 340px; height: 340px; background: rgba(56,189,248,.06); bottom: -80px; left: -60px; }
-
-    /* ── Pulse dot ── */
-    .pulse-dot { animation: pulse-ring 1.8s ease-out infinite; }
-    @keyframes pulse-ring {
-      0%   { box-shadow: 0 0 0 0   rgba(34,197,94,.6); }
-      70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
-      100% { box-shadow: 0 0 0 0   rgba(34,197,94,0); }
-    }
-
-    /* ── Service cards ── */
-    .service-card { transition: transform .3s, box-shadow .3s; }
-    .service-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,.55); }
-    .service-card .icon-ring { transition: background .3s; }
-    .service-card:hover .icon-ring { background: rgba(245,166,35,.22); }
-
-    /* ── Buttons ── */
-    .btn-primary {
-      position: relative; overflow: hidden;
-      background: linear-gradient(135deg, #F5A623 0%, #FFB830 100%);
-      color: #060F1C; font-weight: 700;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-primary::after {
-      content: '';
-      position: absolute; top: -50%; left: -60%;
-      width: 40%; height: 200%;
-      background: rgba(255,255,255,.18);
-      transform: skewX(-20deg);
-      transition: left .5s;
-    }
-    .btn-primary:hover::after { left: 120%; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,166,35,.45); }
-    .btn-primary:focus-visible { outline: 3px solid #FFB830; outline-offset: 2px; }
-
-    .btn-outline {
-      border: 2px solid rgba(255,255,255,.28);
-      color: #fff;
-      transition: border-color .2s, background .2s;
-    }
-    .btn-outline:hover { border-color: #F5A623; background: rgba(245,166,35,.08); }
-    .btn-outline:focus-visible { outline: 3px solid #FFB830; outline-offset: 2px; }
-
-    /* ── Call card ── */
-    .call-card {
-      background: rgba(11,31,58,.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,.1);
-    }
-
-    /* ── Reveal animations ── */
-    @media (prefers-reduced-motion: no-preference) {
-      .reveal        { opacity: 0; transform: translateY(28px);  transition: opacity .6s ease, transform .6s ease; }
-      .reveal-left   { opacity: 0; transform: translateX(-28px); transition: opacity .6s ease, transform .6s ease; }
-      .reveal-right  { opacity: 0; transform: translateX(28px);  transition: opacity .6s ease, transform .6s ease; }
-      .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
-    }
-    .delay-1 { transition-delay: .1s; }
-    .delay-2 { transition-delay: .2s; }
-    .delay-3 { transition-delay: .3s; }
-    .delay-4 { transition-delay: .45s; }
-
-    /* ── Form inputs ── */
-    .form-input {
-      background: rgba(255,255,255,.05);
-      border: 1.5px solid rgba(255,255,255,.12);
-      color: #fff;
-      transition: border-color .2s, background .2s;
-      outline: none;
-      color-scheme: dark;
-    }
-    .form-input::placeholder { color: rgba(255,255,255,.28); }
-    .form-input:focus { border-color: #F5A623; background: rgba(245,166,35,.05); }
-    .form-input[aria-invalid="true"] { border-color: #f87171; }
-    select.form-input option { background: #0B1F3A; color: #fff; }
-
-    /* ── Testimonial carousel ── */
-    .testimonial-track { display: flex; transition: transform .5s cubic-bezier(.25,.46,.45,.94); }
-
-    /* ── WhatsApp FAB ── */
-    .whatsapp-fab {
-      position: fixed; bottom: 24px; right: 24px;
-      width: 58px; height: 58px;
-      background: #25D366; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 24px rgba(37,211,102,.45);
-      z-index: 900; transition: transform .2s, box-shadow .2s;
-    }
-    .whatsapp-fab:hover { transform: scale(1.1); box-shadow: 0 8px 36px rgba(37,211,102,.6); }
-    .whatsapp-fab:focus-visible { outline: 3px solid #25D366; outline-offset: 3px; }
-
-    /* ── Section line ── */
-    .section-line { width: 48px; height: 3px; background: linear-gradient(90deg,#F5A623,#FFB830); border-radius: 2px; }
-
-    /* ── Stats bar ── */
-    .stat-num { font-family: 'Barlow Condensed', sans-serif; }
-
-    /* ── Mobile menu ── */
-    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .4s ease; }
-    #mobile-menu.open { max-height: 420px; }
-    .ham-line { display: block; width: 22px; height: 2px; background: #fff; transition: transform .3s, opacity .3s; }
-    #ham-btn.active .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    #ham-btn.active .ham-line:nth-child(2) { opacity: 0; }
-    #ham-btn.active .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* ── Divider dots ── */
-    .step-connector { width: 1px; height: 24px; background: linear-gradient(to bottom, rgba(245,166,35,.3), transparent); margin-left: 18px; }
-
-    /* ── Focus styles ── */
-    :focus-visible { outline: 3px solid #F5A623; outline-offset: 2px; border-radius: 4px; }
-    a:not(.btn-primary):not(.btn-outline):not(.whatsapp-fab):focus-visible { outline: 3px solid #F5A623; outline-offset: 2px; }
-
-    /* ── Noise texture ── */
-    .noise::after {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: .07;
-    }
-
-    /* ── Hero headline ── */
-    .hero-headline { font-size: clamp(2.8rem, 8vw, 5.5rem); line-height: .95; }
-
-    /* ── Area pills ── */
-    .area-pill {
-      border: 1px solid rgba(255,255,255,.1);
-      transition: border-color .2s, background .2s;
-    }
-    .area-pill:hover { border-color: rgba(245,166,35,.4); background: rgba(245,166,35,.06); }
-
-    /* ── Logo ring ── */
-    .logo-ring {
-      background: rgba(245,166,35,.12);
-      border: 1.5px solid rgba(245,166,35,.35);
-      border-radius: 12px;
-      width: 42px; height: 42px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      transition: background .2s, border-color .2s;
-    }
-    a:hover .logo-ring { background: rgba(245,166,35,.2); border-color: rgba(245,166,35,.55); }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="BL&N Electrical & Plumbing provides electrical repairs, plumbing services and property maintenance in Plettenberg Bay and surrounding areas.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://bl-n-site.netlify.app/">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BL&N Electrical & Plumbing">
+  <meta property="og:title" content="BL&N Electrical & Plumbing | Plettenberg Bay">
+  <meta property="og:description" content="Electrical, plumbing and property maintenance for homes, holiday properties and businesses around Plettenberg Bay.">
+  <meta property="og:url" content="https://bl-n-site.netlify.app/">
+  <meta property="og:image" content="https://bl-n-site.netlify.app/assets/logo_w.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BL&N Electrical & Plumbing | Plettenberg Bay">
+  <meta name="twitter:description" content="Electrical, plumbing and property maintenance in Plettenberg Bay and surrounds.">
+  <meta name="twitter:image" content="https://bl-n-site.netlify.app/assets/logo_w.png">
+  <link rel="stylesheet" href="assets/site.css">
+  <script defer src="assets/site.js"></script>
+  <title>BL&N Electrical & Plumbing | Plettenberg Bay</title>
 </head>
-<body class="antialiased">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- ── Skip to content ── -->
-<a href="#main-content" class="skip-link font-body text-sm">Skip to main content</a>
-
-<!-- ═══════════════════════════════════════ NAV ════════════════════════════════════════ -->
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 px-4" role="banner">
-  <div class="max-w-6xl mx-auto flex items-center justify-between">
-
-    <!-- Logo -->
-    <a href="#" aria-label="BL&amp;N Electrical &amp; Plumbing – home" class="flex items-center gap-3">
-      <div class="logo-ring">
-        <img src="assets/logo.png" alt="" width="28" height="28"
-             class="w-7 h-7 object-contain" aria-hidden="true" />
-      </div>
-      <div class="leading-none">
-        <span class="font-display font-800 text-white tracking-tight" style="font-size:1.2rem;line-height:1;">BL<span class="text-amber-400">&amp;</span>N</span>
-        <span class="block font-body text-white/45 uppercase tracking-widest mt-0.5" style="font-size:9px;">Electrical &amp; Plumbing</span>
-      </div>
-    </a>
-
-    <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-8 text-sm font-body font-500 text-white/70" aria-label="Main navigation">
-      <a href="#services"      class="hover:text-amber-400 transition-colors">Services</a>
-      <a href="#about"         class="hover:text-amber-400 transition-colors">About</a>
-      <a href="#testimonials"  class="hover:text-amber-400 transition-colors">Reviews</a>
-      <a href="#contact"       class="hover:text-amber-400 transition-colors">Contact</a>
-    </nav>
-
-    <!-- Desktop CTA -->
-    <a href="tel:0825098950"
-       class="hidden md:flex btn-primary items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-body"
-       aria-label="Call 082 509 8950">
-      <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
-      082 509 8950
-    </a>
-
-    <!-- Hamburger -->
-    <button id="ham-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu"
-            class="md:hidden flex flex-col justify-center gap-[5px] w-9 h-9">
-      <span class="ham-line"></span>
-      <span class="ham-line"></span>
-      <span class="ham-line"></span>
-    </button>
-  </div>
-
-  <!-- Mobile menu -->
-  <div id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-    <div class="max-w-6xl mx-auto pt-4 pb-2 flex flex-col gap-1 border-t border-white/10 mt-3">
-      <a href="#services"     class="mobile-link block py-2.5 px-3 rounded-lg text-white/80 hover:bg-white/5 hover:text-amber-400 transition-colors text-sm font-body">Services</a>
-      <a href="#about"        class="mobile-link block py-2.5 px-3 rounded-lg text-white/80 hover:bg-white/5 hover:text-amber-400 transition-colors text-sm font-body">About</a>
-      <a href="#testimonials" class="mobile-link block py-2.5 px-3 rounded-lg text-white/80 hover:bg-white/5 hover:text-amber-400 transition-colors text-sm font-body">Reviews</a>
-      <a href="#contact"      class="mobile-link block py-2.5 px-3 rounded-lg text-white/80 hover:bg-white/5 hover:text-amber-400 transition-colors text-sm font-body">Contact</a>
-      <a href="tel:0825098950" class="mt-2 btn-primary flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-body">
-        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
-        Call 082 509 8950
+  <header class="site-header" id="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="#top" aria-label="BL&N Electrical & Plumbing home">
+        <span class="brand-mark"><img src="assets/logo_w.png" alt="" width="42" height="42" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>BL<span>&amp;</span>N</strong>
+          <small>Electrical &amp; Plumbing</small>
+        </span>
       </a>
-    </div>
-  </div>
-</header>
 
-<!-- ═══════════════════════════════════════ MAIN ═══════════════════════════════════════ -->
-<main id="main-content">
-
-  <!-- ══════════════════════ HERO ══════════════════════ -->
-  <section class="hero-bg noise relative min-h-screen flex flex-col justify-center pt-28 pb-20 px-4"
-           aria-label="Hero — BL&amp;N Electrical &amp; Plumbing">
-    <div class="hero-grid" aria-hidden="true"></div>
-    <div class="orb orb-amber" aria-hidden="true"></div>
-    <div class="orb orb-sky"   aria-hidden="true"></div>
-
-    <div class="max-w-6xl mx-auto w-full relative z-10">
-      <div class="grid lg:grid-cols-2 gap-14 items-center">
-
-        <!-- Left: copy -->
-        <div>
-          <!-- Live badge -->
-          <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-7">
-            <span class="pulse-dot w-2 h-2 rounded-full bg-green-400 inline-block" aria-hidden="true"></span>
-            <span class="text-xs text-white/70 font-body tracking-wide">Serving Plettenberg Bay &amp; surrounds</span>
-          </div>
-
-          <h1 class="hero-headline font-display font-800 text-white tracking-tight mb-6">
-            ELECTRICAL<br />
-            <span class="text-amber-400">&amp; PLUMBING</span><br />
-            <span class="text-white/55">DONE RIGHT</span>
-          </h1>
-
-          <p class="text-white/60 font-body text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-            Fast response, quality workmanship, and honest pricing — your trusted trade professionals in Plettenberg Bay. No job too big or too small.
-          </p>
-
-          <!-- CTAs -->
-          <div class="flex flex-col sm:flex-row gap-3 mb-10">
-            <a href="tel:0825098950"
-               class="btn-primary flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl text-base font-body"
-               aria-label="Call us now on 082 509 8950">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
-              Call Now — 082 509 8950
-            </a>
-            <a href="#contact" class="btn-outline flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl text-base font-body">
-              <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114V5.383zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.731z"/></svg>
-              Get a Free Quote
-            </a>
-          </div>
-
-          <!-- Trust badges -->
-          <div class="flex flex-wrap gap-5" role="list" aria-label="Trust signals">
-            <div class="flex items-center gap-2 text-white/50 text-sm font-body" role="listitem">
-              <svg width="15" height="15" class="text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
-              Licensed Professionals
-            </div>
-            <div class="flex items-center gap-2 text-white/50 text-sm font-body" role="listitem">
-              <svg width="15" height="15" class="text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
-              Same-Day Response
-            </div>
-            <div class="flex items-center gap-2 text-white/50 text-sm font-body" role="listitem">
-              <svg width="15" height="15" class="text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
-              Transparent Pricing
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Call card (desktop) -->
-        <div class="hidden lg:flex justify-center">
-          <div class="call-card rounded-3xl p-8 w-full max-w-sm">
-            <!-- Available badge -->
-            <div class="inline-flex items-center gap-2 bg-green-500/12 border border-green-500/25 rounded-full px-3 py-1.5 mb-7">
-              <span class="pulse-dot w-2 h-2 rounded-full bg-green-400 inline-block" aria-hidden="true"></span>
-              <span class="text-green-400 text-xs font-body font-500">Available for call-outs</span>
-            </div>
-
-            <!-- Big phone -->
-            <p class="text-white/40 text-xs font-body uppercase tracking-widest mb-1.5">Call Us Directly</p>
-            <a href="tel:0825098950" class="block font-display font-800 text-white hover:text-amber-400 transition-colors mb-7"
-               style="font-size: clamp(1.8rem,3.5vw,2.4rem); line-height:1;">
-              082 509 8950
-            </a>
-
-            <!-- Action buttons -->
-            <div class="space-y-3 mb-7">
-              <a href="tel:0825098950"
-                 class="btn-primary w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl text-sm font-body">
-                <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
-                Call Now
-              </a>
-              <a href="https://wa.me/27825098950?text=Hi%2C%20I%20need%20a%20quote%20for%20electrical%2Fplumbing%20work"
-                 target="_blank" rel="noopener noreferrer"
-                 class="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl border border-green-500/40 text-green-400 text-sm font-body hover:bg-green-500/10 transition-all">
-                <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                WhatsApp Us
-              </a>
-            </div>
-
-            <!-- Mini stats -->
-            <div class="pt-6 border-t border-white/10 grid grid-cols-3 gap-3 text-center">
-              <div>
-                <div class="font-display font-800 text-2xl text-amber-400 leading-none">8+</div>
-                <div class="text-white/40 text-xs font-body mt-1 leading-tight">Years<br/>Exp.</div>
-              </div>
-              <div>
-                <div class="font-display font-800 text-2xl text-amber-400 leading-none">500+</div>
-                <div class="text-white/40 text-xs font-body mt-1 leading-tight">Jobs<br/>Done</div>
-              </div>
-              <div>
-                <div class="font-display font-800 text-2xl text-amber-400 leading-none">100%</div>
-                <div class="text-white/40 text-xs font-body mt-1 leading-tight">Satis-<br/>faction</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Scroll hint -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-25" aria-hidden="true">
-      <span class="text-xs font-body tracking-widest uppercase text-white">Scroll</span>
-      <div class="w-px h-8 bg-gradient-to-b from-white to-transparent"></div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════ STATS BAR ══════════════════════ -->
-  <section class="bg-amber-500 py-5 px-4" aria-label="Business statistics">
-    <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x md:divide-amber-600">
-      <div class="flex flex-col items-center text-center md:px-6">
-        <span class="stat-num font-display font-800 text-navy-900 text-3xl md:text-4xl" data-target="500" data-suffix="+">0</span>
-        <span class="text-navy-800 text-xs font-body uppercase tracking-wide mt-0.5">Jobs Completed</span>
-      </div>
-      <div class="flex flex-col items-center text-center md:px-6">
-        <span class="stat-num font-display font-800 text-navy-900 text-3xl md:text-4xl" data-target="8" data-suffix="+">0</span>
-        <span class="text-navy-800 text-xs font-body uppercase tracking-wide mt-0.5">Years Experience</span>
-      </div>
-      <div class="flex flex-col items-center text-center md:px-6">
-        <span class="stat-num font-display font-800 text-navy-900 text-3xl md:text-4xl" data-target="24" data-suffix="h">0</span>
-        <span class="text-navy-800 text-xs font-body uppercase tracking-wide mt-0.5">Response Time</span>
-      </div>
-      <div class="flex flex-col items-center text-center md:px-6">
-        <span class="stat-num font-display font-800 text-navy-900 text-3xl md:text-4xl" data-target="100" data-suffix="%">0</span>
-        <span class="text-navy-800 text-xs font-body uppercase tracking-wide mt-0.5">Satisfaction</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════ SERVICES ══════════════════════ -->
-  <section id="services" class="py-20 md:py-28 px-4" aria-labelledby="services-heading">
-    <div class="max-w-6xl mx-auto">
-
-      <!-- Heading -->
-      <div class="mb-14 reveal">
-        <div class="section-line mb-4" aria-hidden="true"></div>
-        <h2 id="services-heading" class="font-display font-800 text-white text-4xl md:text-5xl tracking-tight mb-3">What We Do</h2>
-        <p class="text-white/50 font-body text-base max-w-md">Complete electrical and plumbing solutions for homes, holiday properties, and businesses throughout Plettenberg Bay and the Garden Route.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-5">
-
-        <!-- Electrical -->
-        <article class="service-card bg-navy-800 border border-white/8 rounded-2xl p-7 reveal delay-1">
-          <div class="icon-ring w-14 h-14 rounded-xl bg-amber-500/15 flex items-center justify-center mb-5" aria-hidden="true">
-            <svg width="28" height="28" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-700 text-white text-2xl mb-3">Electrical Repairs</h3>
-          <p class="text-white/55 font-body text-sm leading-relaxed mb-5">Fault finding, rewiring, DB board upgrades, plug and light installations, geyser connections, outdoor lighting, and all general electrical work.</p>
-          <ul class="space-y-2" aria-label="Electrical services list">
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" aria-hidden="true"></span>DB Board &amp; Fault Finding</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" aria-hidden="true"></span>Rewiring &amp; New Installations</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" aria-hidden="true"></span>Geyser &amp; Outdoor Lighting</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" aria-hidden="true"></span>CoC Certificates of Compliance</li>
-          </ul>
-        </article>
-
-        <!-- Plumbing -->
-        <article class="service-card bg-navy-800 border border-white/8 rounded-2xl p-7 reveal delay-2">
-          <div class="icon-ring w-14 h-14 rounded-xl bg-sky-500/15 flex items-center justify-center mb-5" aria-hidden="true">
-            <svg width="28" height="28" fill="none" stroke="#38BDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/>
-              <circle cx="12" cy="9" r="2.5" fill="none"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-700 text-white text-2xl mb-3">Plumbing Services</h3>
-          <p class="text-white/55 font-body text-sm leading-relaxed mb-5">Leak repairs, burst pipes, toilet and tap replacements, drain blockages, geyser plumbing, bathroom installations, and water pressure issues.</p>
-          <ul class="space-y-2" aria-label="Plumbing services list">
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0" aria-hidden="true"></span>Leak &amp; Burst Pipe Repairs</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0" aria-hidden="true"></span>Toilets, Taps &amp; Basins</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0" aria-hidden="true"></span>Geyser Installations</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0" aria-hidden="true"></span>Drain Blockages Cleared</li>
-          </ul>
-        </article>
-
-        <!-- Maintenance -->
-        <article class="service-card bg-navy-800 border border-white/8 rounded-2xl p-7 reveal delay-3">
-          <div class="icon-ring w-14 h-14 rounded-xl bg-green-500/15 flex items-center justify-center mb-5" aria-hidden="true">
-            <svg width="28" height="28" fill="none" stroke="#4ADE80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-700 text-white text-2xl mb-3">Property Maintenance</h3>
-          <p class="text-white/55 font-body text-sm leading-relaxed mb-5">Ongoing maintenance plans for homeowners, holiday rentals, and estates. Keep your property in top shape year-round with scheduled check-ups.</p>
-          <ul class="space-y-2" aria-label="Maintenance services list">
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" aria-hidden="true"></span>Holiday Home Care Plans</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" aria-hidden="true"></span>Pre-Sale Property Checks</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" aria-hidden="true"></span>Estate &amp; Complex Services</li>
-            <li class="flex items-center gap-2 text-white/60 text-xs font-body"><span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" aria-hidden="true"></span>Reactive Emergency Call-Outs</li>
-          </ul>
-        </article>
-      </div>
-
-      <!-- CTA strip -->
-      <div class="mt-8 bg-gradient-to-r from-amber-500/15 to-amber-500/5 border border-amber-500/20 rounded-2xl p-6
-                  flex flex-col sm:flex-row items-center justify-between gap-4 reveal">
-        <div>
-          <p class="font-display font-700 text-white text-xl">Not sure what you need?</p>
-          <p class="text-white/55 text-sm font-body mt-0.5">Call us and we'll advise you — no obligation, no call-out fee for quotes.</p>
-        </div>
-        <a href="tel:0825098950"
-           class="btn-primary flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-body whitespace-nowrap">
-          <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
-          Call Us Now
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════ ABOUT ══════════════════════ -->
-  <section id="about" class="py-20 md:py-28 px-4 bg-navy-800/40" aria-labelledby="about-heading">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-
-        <!-- Left -->
-        <div class="reveal-left">
-          <div class="section-line mb-4" aria-hidden="true"></div>
-          <h2 id="about-heading" class="font-display font-700 text-white text-4xl md:text-5xl tracking-tight mb-5">
-            Plett's Trusted<br/>Trades Team
-          </h2>
-          <p class="text-white/60 font-body text-base leading-relaxed mb-5">
-            BL&amp;N Electrical and Plumbing has built a reputation across Plettenberg Bay for showing up, getting the job done properly, and treating every home like our own. Whether you're a permanent resident, a holiday home owner, or managing a property portfolio — we're the team you call.
-          </p>
-          <p class="text-white/60 font-body text-base leading-relaxed mb-8">
-            We understand that electrical and plumbing issues can't wait. That's why we offer rapid response times, honest assessments, and workmanship backed by our satisfaction guarantee.
-          </p>
-
-          <!-- Feature grid -->
-          <div class="grid grid-cols-2 gap-4" role="list" aria-label="Our strengths">
-            <div class="flex items-start gap-3" role="listitem">
-              <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/></svg>
-              </div>
-              <div>
-                <p class="font-body text-white font-600 text-sm">Fast Response</p>
-                <p class="font-body text-white/45 text-xs mt-0.5">Same-day for urgent jobs</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-3" role="listitem">
-              <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/></svg>
-              </div>
-              <div>
-                <p class="font-body text-white font-600 text-sm">Fair Pricing</p>
-                <p class="font-body text-white/45 text-xs mt-0.5">Upfront quotes, no surprises</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-3" role="listitem">
-              <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/></svg>
-              </div>
-              <div>
-                <p class="font-body text-white font-600 text-sm">Locally Based</p>
-                <p class="font-body text-white/45 text-xs mt-0.5">Plettenberg Bay natives</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-3" role="listitem">
-              <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5" aria-hidden="true">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/></svg>
-              </div>
-              <div>
-                <p class="font-body text-white font-600 text-sm">Workmanship Guarantee</p>
-                <p class="font-body text-white/45 text-xs mt-0.5">We stand by our work</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: How it works -->
-        <div class="reveal-right">
-          <div class="bg-navy-800 border border-white/8 rounded-2xl p-7">
-            <h3 class="font-display font-700 text-white text-2xl mb-7">How It Works</h3>
-            <ol class="space-y-0" aria-label="Our process">
-              <li class="flex gap-4">
-                <div class="flex flex-col items-center">
-                  <div class="flex-shrink-0 w-9 h-9 rounded-full bg-amber-500 flex items-center justify-center">
-                    <span class="font-display font-700 text-navy-900 text-base" aria-hidden="true">1</span>
-                  </div>
-                  <div class="step-connector mt-2"></div>
-                </div>
-                <div class="pb-7">
-                  <p class="font-body text-white font-600 text-sm mb-1">Call or Send a Quote Request</p>
-                  <p class="font-body text-white/50 text-xs leading-relaxed">Reach out by phone, WhatsApp, or our contact form — describe what you need.</p>
-                </div>
-              </li>
-              <li class="flex gap-4">
-                <div class="flex flex-col items-center">
-                  <div class="flex-shrink-0 w-9 h-9 rounded-full bg-amber-500 flex items-center justify-center">
-                    <span class="font-display font-700 text-navy-900 text-base" aria-hidden="true">2</span>
-                  </div>
-                  <div class="step-connector mt-2"></div>
-                </div>
-                <div class="pb-7">
-                  <p class="font-body text-white font-600 text-sm mb-1">We Assess &amp; Quote</p>
-                  <p class="font-body text-white/50 text-xs leading-relaxed">We'll visit, assess the job, and give you a clear, honest quote before any work starts.</p>
-                </div>
-              </li>
-              <li class="flex gap-4">
-                <div class="flex-shrink-0 w-9 h-9 rounded-full bg-amber-500 flex items-center justify-center">
-                  <span class="font-display font-700 text-navy-900 text-base" aria-hidden="true">3</span>
-                </div>
-                <div>
-                  <p class="font-body text-white font-600 text-sm mb-1">Job Done Properly</p>
-                  <p class="font-body text-white/50 text-xs leading-relaxed">We complete the work to a high standard and clean up after ourselves. Simple as that.</p>
-                </div>
-              </li>
-            </ol>
-            <a href="#contact" class="mt-7 btn-primary w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-body">
-              Request a Free Quote
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════ SERVICE AREA ══════════════════════ -->
-  <section class="py-12 px-4 border-y border-white/6" aria-label="Service area coverage">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row items-center gap-6 reveal">
-        <div class="flex items-center gap-3 flex-shrink-0">
-          <div class="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center" aria-hidden="true">
-            <svg width="16" height="16" fill="#F5A623" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
-          </div>
-          <p class="font-display font-700 text-white text-lg tracking-tight whitespace-nowrap">Areas We Cover</p>
-        </div>
-        <div class="w-px h-8 bg-white/10 hidden md:block" aria-hidden="true"></div>
-        <div class="flex flex-wrap gap-2 justify-center md:justify-start" role="list" aria-label="Service area locations">
-          <span class="area-pill font-body text-white/60 text-xs px-3 py-1.5 rounded-full" role="listitem">Plettenberg Bay</span>
-          <span class="area-pill font-body text-white/60 text-xs px-3 py-1.5 rounded-full" role="listitem">Knysna</span>
-          <span class="area-pill font-body text-white/60 text-xs px-3 py-1.5 rounded-full" role="listitem">Bitou Municipality</span>
-          <span class="area-pill font-body text-white/60 text-xs px-3 py-1.5 rounded-full" role="listitem">Keurboomstrand</span>
-          <span class="area-pill font-body text-white/60 text-xs px-3 py-1.5 rounded-full" role="listitem">Natures Valley</span>
-          <span class="area-pill font-body text-white/60 text-xs px-3 py-1.5 rounded-full" role="listitem">The Crags</span>
-          <span class="area-pill font-body text-white/60 text-xs px-3 py-1.5 rounded-full" role="listitem">Garden Route</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════ TESTIMONIALS ══════════════════════ -->
-  <section id="testimonials" class="py-20 md:py-28 px-4" aria-labelledby="testimonials-heading">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-12 reveal">
-        <div class="section-line mb-4" aria-hidden="true"></div>
-        <h2 id="testimonials-heading" class="font-display font-700 text-white text-4xl md:text-5xl tracking-tight mb-3">What Clients Say</h2>
-        <p class="text-white/50 font-body text-base">Real feedback from homeowners and property managers across Plettenberg Bay.</p>
-      </div>
-
-      <div class="relative overflow-hidden reveal" role="region" aria-label="Client testimonials carousel" aria-roledescription="carousel">
-        <div id="testimonial-track" class="testimonial-track gap-5" style="width:300%;" aria-live="polite">
-
-          <!-- Slide 1 -->
-          <div class="w-1/3 flex-shrink-0 grid md:grid-cols-2 gap-5" role="group" aria-label="Testimonials 1 of 3">
-            <blockquote class="bg-navy-800 border border-white/8 rounded-2xl p-6">
-              <div class="flex items-center gap-1 mb-4" aria-label="5 star rating" role="img">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-              </div>
-              <p class="text-white/70 font-body text-sm leading-relaxed mb-5">"Had a major water leak at my holiday home while I was in Cape Town. BL&amp;N had it sorted within hours. Absolutely brilliant service — wouldn't call anyone else."</p>
-              <footer class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-amber-500/20 flex items-center justify-center font-display font-700 text-amber-400 flex-shrink-0" aria-hidden="true">M</div>
-                <div>
-                  <cite class="font-body text-white font-600 text-xs not-italic">Michelle van der Berg</cite>
-                  <p class="font-body text-white/40 text-xs">Holiday Home Owner, Plett</p>
-                </div>
-              </footer>
-            </blockquote>
-            <blockquote class="bg-navy-800 border border-white/8 rounded-2xl p-6">
-              <div class="flex items-center gap-1 mb-4" aria-label="5 star rating" role="img">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-              </div>
-              <p class="text-white/70 font-body text-sm leading-relaxed mb-5">"Used BL&amp;N to upgrade our DB board and sort out a few electrical gremlins. Priced fairly, arrived on time, and left everything spotless. Very professional."</p>
-              <footer class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-sky-500/20 flex items-center justify-center font-display font-700 text-sky-400 flex-shrink-0" aria-hidden="true">J</div>
-                <div>
-                  <cite class="font-body text-white font-600 text-xs not-italic">James Pietersen</cite>
-                  <p class="font-body text-white/40 text-xs">Homeowner, Plettenberg Bay</p>
-                </div>
-              </footer>
-            </blockquote>
-          </div>
-
-          <!-- Slide 2 -->
-          <div class="w-1/3 flex-shrink-0 grid md:grid-cols-2 gap-5" role="group" aria-label="Testimonials 2 of 3">
-            <blockquote class="bg-navy-800 border border-white/8 rounded-2xl p-6">
-              <div class="flex items-center gap-1 mb-4" aria-label="5 star rating" role="img">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-              </div>
-              <p class="text-white/70 font-body text-sm leading-relaxed mb-5">"We manage several short-term rental properties in Plett. BL&amp;N are our go-to team for anything that comes up. Reliable, fast, and the guests never even notice a problem."</p>
-              <footer class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-green-500/20 flex items-center justify-center font-display font-700 text-green-400 flex-shrink-0" aria-hidden="true">S</div>
-                <div>
-                  <cite class="font-body text-white font-600 text-xs not-italic">Sandra Kruger</cite>
-                  <p class="font-body text-white/40 text-xs">Property Manager, Plett</p>
-                </div>
-              </footer>
-            </blockquote>
-            <blockquote class="bg-navy-800 border border-white/8 rounded-2xl p-6">
-              <div class="flex items-center gap-1 mb-4" aria-label="5 star rating" role="img">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-              </div>
-              <p class="text-white/70 font-body text-sm leading-relaxed mb-5">"Geyser packed up over Christmas. Blessing came out the next morning, had us back on hot water same day. Couldn't ask for more."</p>
-              <footer class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-amber-500/20 flex items-center justify-center font-display font-700 text-amber-400 flex-shrink-0" aria-hidden="true">T</div>
-                <div>
-                  <cite class="font-body text-white font-600 text-xs not-italic">Thomas Ferreira</cite>
-                  <p class="font-body text-white/40 text-xs">Resident, Plettenberg Bay</p>
-                </div>
-              </footer>
-            </blockquote>
-          </div>
-
-          <!-- Slide 3 -->
-          <div class="w-1/3 flex-shrink-0 grid md:grid-cols-2 gap-5" role="group" aria-label="Testimonials 3 of 3">
-            <blockquote class="bg-navy-800 border border-white/8 rounded-2xl p-6">
-              <div class="flex items-center gap-1 mb-4" aria-label="5 star rating" role="img">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-              </div>
-              <p class="text-white/70 font-body text-sm leading-relaxed mb-5">"Totally blocked drain two nights before guests arrived. BL&amp;N sorted it without a fuss. Professional, quick, and very reasonably priced. 10/10."</p>
-              <footer class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-purple-500/20 flex items-center justify-center font-display font-700 text-purple-400 flex-shrink-0" aria-hidden="true">A</div>
-                <div>
-                  <cite class="font-body text-white font-600 text-xs not-italic">Alicia Louw</cite>
-                  <p class="font-body text-white/40 text-xs">Airbnb Host, Plett</p>
-                </div>
-              </footer>
-            </blockquote>
-            <blockquote class="bg-navy-800 border border-white/8 rounded-2xl p-6">
-              <div class="flex items-center gap-1 mb-4" aria-label="5 star rating" role="img">
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-                <svg width="14" height="14" fill="#F5A623" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>
-              </div>
-              <p class="text-white/70 font-body text-sm leading-relaxed mb-5">"We've used BL&amp;N for our maintenance contract for two years. Always on time, work is top quality, and they're honest about what does and doesn't need fixing."</p>
-              <footer class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-sky-500/20 flex items-center justify-center font-display font-700 text-sky-400 flex-shrink-0" aria-hidden="true">R</div>
-                <div>
-                  <cite class="font-body text-white font-600 text-xs not-italic">Robert Swanepoel</cite>
-                  <p class="font-body text-white/40 text-xs">Estate Manager, Garden Route</p>
-                </div>
-              </footer>
-            </blockquote>
-          </div>
-
-        </div><!-- /track -->
-
-        <!-- Carousel controls -->
-        <div class="flex items-center justify-between mt-6">
-          <div class="flex gap-2">
-            <button id="prev-btn" aria-label="Previous testimonials"
-                    class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/60 hover:border-amber-500 hover:text-amber-400 transition-all">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
-            </button>
-            <button id="next-btn" aria-label="Next testimonials"
-                    class="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/60 hover:border-amber-500 hover:text-amber-400 transition-all">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-            </button>
-          </div>
-          <div class="flex gap-2" id="carousel-dots" role="tablist" aria-label="Testimonial slides">
-            <button class="dot w-6 h-1.5 rounded-full bg-amber-400 transition-all" data-idx="0" role="tab" aria-selected="true"  aria-label="Slide 1 of 3"></button>
-            <button class="dot w-1.5 h-1.5 rounded-full bg-white/20 transition-all" data-idx="1" role="tab" aria-selected="false" aria-label="Slide 2 of 3"></button>
-            <button class="dot w-1.5 h-1.5 rounded-full bg-white/20 transition-all" data-idx="2" role="tab" aria-selected="false" aria-label="Slide 3 of 3"></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════ CONTACT ══════════════════════ -->
-  <section id="contact" class="py-20 md:py-28 px-4 bg-navy-800/40" aria-labelledby="contact-heading">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-12 items-start">
-
-        <!-- Left: info -->
-        <div class="reveal-left">
-          <div class="section-line mb-4" aria-hidden="true"></div>
-          <h2 id="contact-heading" class="font-display font-700 text-white text-4xl md:text-5xl tracking-tight mb-4">Get In Touch</h2>
-          <p class="text-white/55 font-body text-base leading-relaxed mb-8">Ready to get started or have a question? Reach out — we respond quickly and will give you an honest assessment of your job.</p>
-
-          <!-- Contact cards -->
-          <div class="space-y-4 mb-8">
-            <a href="tel:0825098950"
-               class="flex items-center gap-4 bg-navy-800 border border-white/8 rounded-xl p-4 group hover:border-amber-500/40 transition-all"
-               aria-label="Call 082 509 8950">
-              <div class="w-11 h-11 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                <svg width="18" height="18" fill="#F5A623" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
-              </div>
-              <div>
-                <p class="text-white/40 text-xs font-body uppercase tracking-wide mb-0.5">Phone</p>
-                <p class="text-white font-body font-600 text-sm group-hover:text-amber-400 transition-colors">082 509 8950</p>
-              </div>
-              <svg class="ml-auto text-white/20 group-hover:text-amber-400 transition-colors" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-            </a>
-
-            <a href="mailto:blessingsibanda30@gmail.com"
-               class="flex items-center gap-4 bg-navy-800 border border-white/8 rounded-xl p-4 group hover:border-amber-500/40 transition-all"
-               aria-label="Email blessingsibanda30@gmail.com">
-              <div class="w-11 h-11 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                <svg width="18" height="18" fill="#F5A623" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114V5.383zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.731z"/></svg>
-              </div>
-              <div class="min-w-0">
-                <p class="text-white/40 text-xs font-body uppercase tracking-wide mb-0.5">Email</p>
-                <p class="text-white font-body font-600 text-sm group-hover:text-amber-400 transition-colors truncate">blessingsibanda30@gmail.com</p>
-              </div>
-              <svg class="ml-auto flex-shrink-0 text-white/20 group-hover:text-amber-400 transition-colors" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-            </a>
-
-            <div class="flex items-center gap-4 bg-navy-800 border border-white/8 rounded-xl p-4">
-              <div class="w-11 h-11 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                <svg width="18" height="18" fill="#F5A623" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
-              </div>
-              <div>
-                <p class="text-white/40 text-xs font-body uppercase tracking-wide mb-0.5">Location</p>
-                <p class="text-white font-body font-600 text-sm">Plettenberg Bay, Western Cape</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- WhatsApp -->
-          <a href="https://wa.me/27825098950?text=Hi%2C%20I%20need%20a%20quote%20for%20electrical%2Fplumbing%20work"
-             target="_blank" rel="noopener noreferrer"
-             class="flex items-center gap-3 bg-green-600 hover:bg-green-500 transition-colors rounded-xl py-3.5 px-5 text-white font-body font-600 text-sm"
-             aria-label="Open WhatsApp to contact BL&amp;N">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-            Chat on WhatsApp
-          </a>
-        </div>
-
-        <!-- Right: form -->
-        <div class="reveal-right">
-          <div class="bg-navy-800 border border-white/8 rounded-2xl p-7">
-            <h3 class="font-display font-700 text-white text-2xl mb-1">Request a Quote</h3>
-            <p class="text-white/45 text-xs font-body mb-6">We'll get back to you within a few hours.</p>
-
-            <form id="quote-form" name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-              <input type="hidden" name="form-name" value="quote" />
-              <p class="hidden" aria-hidden="true"><label>Don't fill this out: <input name="bot-field" tabindex="-1" /></label></p>
-
-              <div class="space-y-4">
-                <div class="grid grid-cols-2 gap-4">
-                  <div>
-                    <label for="fname" class="block text-white/55 text-xs font-body uppercase tracking-wide mb-1.5">
-                      Name <span class="text-amber-400" aria-hidden="true">*</span><span class="sr-only">(required)</span>
-                    </label>
-                    <input type="text" id="fname" name="name" autocomplete="name" required
-                           placeholder="Your name"
-                           aria-required="true" aria-describedby="form-error"
-                           class="form-input w-full rounded-xl px-4 py-3 text-sm font-body" />
-                  </div>
-                  <div>
-                    <label for="fphone" class="block text-white/55 text-xs font-body uppercase tracking-wide mb-1.5">
-                      Phone <span class="text-amber-400" aria-hidden="true">*</span><span class="sr-only">(required)</span>
-                    </label>
-                    <input type="tel" id="fphone" name="phone" autocomplete="tel" required
-                           placeholder="Your number"
-                           aria-required="true" aria-describedby="form-error"
-                           class="form-input w-full rounded-xl px-4 py-3 text-sm font-body" />
-                  </div>
-                </div>
-
-                <div>
-                  <label for="femail" class="block text-white/55 text-xs font-body uppercase tracking-wide mb-1.5">Email</label>
-                  <input type="email" id="femail" name="email" autocomplete="email"
-                         placeholder="your@email.com"
-                         class="form-input w-full rounded-xl px-4 py-3 text-sm font-body" />
-                </div>
-
-                <div>
-                  <label for="fservice" class="block text-white/55 text-xs font-body uppercase tracking-wide mb-1.5">
-                    Service Needed <span class="text-amber-400" aria-hidden="true">*</span><span class="sr-only">(required)</span>
-                  </label>
-                  <select id="fservice" name="service" required
-                          aria-required="true" aria-describedby="form-error"
-                          class="form-input w-full rounded-xl px-4 py-3 text-sm font-body appearance-none cursor-pointer">
-                    <option value="" disabled selected>Select a service…</option>
-                    <option value="electrical">Electrical Repair</option>
-                    <option value="plumbing">Plumbing Service</option>
-                    <option value="maintenance">Property Maintenance</option>
-                    <option value="coc">Certificate of Compliance (CoC)</option>
-                    <option value="other">Other / Not Sure</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label for="fmessage" class="block text-white/55 text-xs font-body uppercase tracking-wide mb-1.5">
-                    Describe the Job <span class="text-amber-400" aria-hidden="true">*</span><span class="sr-only">(required)</span>
-                  </label>
-                  <textarea id="fmessage" name="message" rows="4" required
-                            placeholder="Tell us what needs doing…"
-                            aria-required="true" aria-describedby="form-error"
-                            class="form-input w-full rounded-xl px-4 py-3 text-sm font-body resize-none"></textarea>
-                </div>
-
-                <!-- Error -->
-                <div id="form-error" role="alert" aria-live="assertive"
-                     class="hidden bg-red-500/15 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 text-xs font-body"></div>
-
-                <!-- Success -->
-                <div id="form-success" role="status" aria-live="polite"
-                     class="hidden bg-green-500/15 border border-green-500/30 rounded-xl px-4 py-3 text-green-400 text-sm font-body flex items-center gap-2">
-                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
-                  <span>Thanks! We'll be in touch shortly.</span>
-                </div>
-
-                <button type="submit" id="submit-btn"
-                        class="btn-primary w-full flex items-center justify-center gap-2 py-4 rounded-xl text-base font-body">
-                  <span id="submit-text">Send Quote Request</span>
-                  <span id="submit-loading" class="hidden" aria-hidden="true">
-                    <svg class="animate-spin" width="16" height="16" fill="none" viewBox="0 0 24 24">
-                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                    </svg>
-                  </span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<!-- ═══════════════════════════════════════ FOOTER ════════════════════════════════════ -->
-<footer class="bg-navy-900 border-t border-white/8 py-12 px-4" role="contentinfo">
-  <div class="max-w-6xl mx-auto">
-    <div class="grid md:grid-cols-3 gap-8 mb-10">
-
-      <!-- Brand -->
-      <div>
-        <div class="flex items-center gap-3 mb-4">
-          <div class="logo-ring" style="width:40px;height:40px;">
-            <img src="assets/logo.png" alt="" width="26" height="26"
-                 class="object-contain" aria-hidden="true" style="width:26px;height:26px;" />
-          </div>
-          <div class="leading-none">
-            <span class="font-display font-800 text-white tracking-tight" style="font-size:1.1rem;line-height:1;">BL<span class="text-amber-400">&amp;</span>N</span>
-            <span class="block font-body text-white/40 uppercase tracking-widest mt-0.5" style="font-size:9px;">Electrical &amp; Plumbing</span>
-          </div>
-        </div>
-        <p class="text-white/40 text-xs font-body leading-relaxed">
-          Your trusted local trade professionals for electrical repairs, plumbing services, and property maintenance across Plettenberg Bay and the Garden Route.
-        </p>
-      </div>
-
-      <!-- Services links -->
-      <nav aria-label="Footer services">
-        <p class="text-white/60 text-xs font-body uppercase tracking-widest mb-4">Services</p>
-        <ul class="space-y-2">
-          <li><a href="#services" class="text-white/45 text-xs font-body hover:text-amber-400 transition-colors">Electrical Repairs</a></li>
-          <li><a href="#services" class="text-white/45 text-xs font-body hover:text-amber-400 transition-colors">Plumbing Services</a></li>
-          <li><a href="#services" class="text-white/45 text-xs font-body hover:text-amber-400 transition-colors">Property Maintenance</a></li>
-          <li><a href="#services" class="text-white/45 text-xs font-body hover:text-amber-400 transition-colors">CoC Certificates</a></li>
-        </ul>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#about">Why BL&amp;N</a>
+        <a href="#process">How it works</a>
+        <a href="#contact">Contact</a>
       </nav>
 
-      <!-- Contact -->
-      <div>
-        <p class="text-white/60 text-xs font-body uppercase tracking-widest mb-4">Contact</p>
-        <address class="not-italic space-y-3">
-          <div><a href="tel:0825098950" class="flex items-center gap-2 text-white/45 text-xs font-body hover:text-amber-400 transition-colors">
-            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328z"/></svg>
-            082 509 8950
-          </a></div>
-          <div><a href="mailto:blessingsibanda30@gmail.com" class="flex items-center gap-2 text-white/45 text-xs font-body hover:text-amber-400 transition-colors">
-            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114V5.383zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.731z"/></svg>
-            blessingsibanda30@gmail.com
-          </a></div>
-          <div class="flex items-center gap-2 text-white/45 text-xs font-body">
-            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
-            Plettenberg Bay, Western Cape, South Africa
-          </div>
-        </address>
+      <div class="nav-actions">
+        <a class="nav-phone" href="tel:0825098950" aria-label="Call BL&N on 082 509 8950">082 509 8950</a>
+        <a class="button button-small" href="#contact">Request a quote</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
 
-    <div class="border-t border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p class="text-white/25 text-xs font-body">&copy; <span id="yr"></span> BL&amp;N Electrical &amp; Plumbing. All rights reserved.</p>
-      <p class="text-white/20 text-xs font-body">Plettenberg Bay, South Africa</p>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+      <div class="container mobile-nav-inner">
+        <a href="#services">Services</a>
+        <a href="#about">Why BL&amp;N</a>
+        <a href="#process">How it works</a>
+        <a href="#coverage">Areas</a>
+        <a href="#contact">Contact</a>
+        <a class="button" href="tel:0825098950">Call 082 509 8950</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+
+      <div class="container hero-layout">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Plettenberg Bay &amp; surrounds</div>
+          <h1 id="hero-title">Trade work that<br><span>shows up right.</span></h1>
+          <p class="hero-lead">Reliable electrical, plumbing and property maintenance — with clear communication from the first call to the final clean-up.</p>
+          <div class="hero-actions">
+            <a class="button" href="tel:0825098950">Call BL&amp;N <span aria-hidden="true">↗</span></a>
+            <a class="button button-ghost" href="#contact">Get a free quote</a>
+          </div>
+          <div class="hero-proof" aria-label="Business highlights">
+            <div><strong>8+</strong><span>years experience</span></div>
+            <div><strong>500+</strong><span>jobs completed</span></div>
+            <div><strong>24h</strong><span>target response</span></div>
+          </div>
+        </div>
+
+        <div class="hero-panel reveal reveal-delay-1" aria-label="BL&N service overview">
+          <div class="panel-topline"><span>BL&amp;N FIELD TEAM</span><span>AVAILABLE FOR CALLOUTS</span></div>
+          <div class="panel-brand">
+            <img src="assets/logo_w.png" alt="BL&N" width="168" height="168">
+          </div>
+          <div class="panel-copy">
+            <span class="mini-label">One team. Three core services.</span>
+            <h2>Electrical.<br>Plumbing.<br><em>Maintenance.</em></h2>
+            <p>Built for homes, holiday properties, estates and businesses that need the job handled properly.</p>
+          </div>
+          <div class="panel-list">
+            <span>Fault finding &amp; repairs</span>
+            <span>Leaks &amp; plumbing</span>
+            <span>Property care</span>
+          </div>
+          <a class="panel-link" href="#services">Explore services <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <a class="hero-scroll" href="#services" aria-label="Scroll to services">Scroll <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="trust-strip" aria-label="BL&N service benefits">
+      <div class="container trust-grid">
+        <div><span class="trust-icon" aria-hidden="true">01</span><div><strong>Fast response</strong><span>Urgent issues are treated urgently.</span></div></div>
+        <div><span class="trust-icon" aria-hidden="true">02</span><div><strong>Clear quotes</strong><span>You know what the job involves before work starts.</span></div></div>
+        <div><span class="trust-icon" aria-hidden="true">03</span><div><strong>Clean finish</strong><span>Work completed properly, with care for your property.</span></div></div>
+      </div>
+    </section>
+
+    <section class="section services-section" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><span class="kicker">What we do</span><h2 id="services-title">The right trade for<br><span>the job in front of you.</span></h2></div>
+          <p>From a leaking pipe to a bigger property maintenance requirement, BL&amp;N keeps the experience simple: one team, one conversation, practical solutions.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card service-card-main reveal">
+            <div class="service-no">01</div>
+            <div class="service-icon service-icon-amber" aria-hidden="true">⚡</div>
+            <div class="service-content">
+              <span class="service-label">Electrical</span>
+              <h3>Electrical repairs &amp; installations</h3>
+              <p>Fault finding, DB boards, rewiring, plugs, lighting, geyser connections and general electrical work.</p>
+              <ul>
+                <li>Fault finding &amp; repairs</li>
+                <li>DB board work &amp; upgrades</li>
+                <li>Lighting &amp; new installations</li>
+                <li>CoC services</li>
+              </ul>
+            </div>
+            <a href="#contact" class="service-link" aria-label="Request an electrical service quote">Request service <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="service-card service-card-blue reveal reveal-delay-1">
+            <div class="service-no">02</div>
+            <div class="service-icon service-icon-blue" aria-hidden="true">◌</div>
+            <div class="service-content">
+              <span class="service-label">Plumbing</span>
+              <h3>Plumbing repairs &amp; installations</h3>
+              <p>Leaks, bursts, blocked drains, toilets, taps, basins, geysers and water-pressure problems.</p>
+              <ul>
+                <li>Leak &amp; burst pipe repairs</li>
+                <li>Toilets, taps &amp; basins</li>
+                <li>Geyser plumbing</li>
+                <li>Blocked drains</li>
+              </ul>
+            </div>
+            <a href="#contact" class="service-link" aria-label="Request a plumbing service quote">Request service <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="service-card service-card-dark reveal reveal-delay-2">
+            <div class="service-no">03</div>
+            <div class="service-icon service-icon-green" aria-hidden="true">⌁</div>
+            <div class="service-content">
+              <span class="service-label">Maintenance</span>
+              <h3>Property maintenance</h3>
+              <p>Ongoing help for homeowners, holiday properties, rentals, estates and properties that need regular attention.</p>
+              <ul>
+                <li>Holiday-home care</li>
+                <li>Reactive call-outs</li>
+                <li>Property checks</li>
+                <li>Estate &amp; complex work</li>
+              </ul>
+            </div>
+            <a href="#contact" class="service-link" aria-label="Request a property maintenance quote">Request service <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section feature-section" id="about" aria-labelledby="about-title">
+      <div class="container feature-layout">
+        <div class="feature-visual reveal" aria-hidden="true">
+          <div class="visual-grid"></div>
+          <div class="visual-orbit visual-orbit-one"></div>
+          <div class="visual-orbit visual-orbit-two"></div>
+          <div class="visual-core"><img src="assets/logo_w.png" alt="" width="132" height="132"></div>
+          <div class="visual-tag visual-tag-top">PLETTENBERG BAY</div>
+          <div class="visual-tag visual-tag-bottom">TRUSTED TRADE SUPPORT</div>
+        </div>
+        <div class="feature-copy reveal reveal-delay-1">
+          <span class="kicker">Why BL&amp;N</span>
+          <h2 id="about-title">Professional without<br><span>the runaround.</span></h2>
+          <p class="feature-intro">Electrical and plumbing problems are disruptive enough. The service around them should be the easy part.</p>
+          <div class="benefit-list">
+            <div class="benefit"><span>01</span><div><strong>One clear point of contact</strong><p>Tell us what is happening and we help you work out the next step.</p></div></div>
+            <div class="benefit"><span>02</span><div><strong>Practical, honest advice</strong><p>We focus on what the property actually needs instead of making the job sound bigger.</p></div></div>
+            <div class="benefit"><span>03</span><div><strong>Built for local properties</strong><p>Homes, holiday accommodation, rentals, estates and businesses all have different pressures. We understand the difference.</p></div></div>
+          </div>
+          <a class="text-link" href="#contact">Talk to the team <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process-section" id="process" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section-head section-head-tight reveal">
+          <div><span class="kicker">How it works</span><h2 id="process-title">No mystery.<br><span>Just a better process.</span></h2></div>
+          <p>Whether the issue is urgent or planned, the goal is the same: get the right person looking at the right problem with as little friction as possible.</p>
+        </div>
+        <ol class="process-grid">
+          <li class="process-step reveal"><span>01</span><div><h3>Tell us what you need</h3><p>Call, WhatsApp or send a quote request with the basics of the job.</p></div></li>
+          <li class="process-step reveal reveal-delay-1"><span>02</span><div><h3>We assess &amp; quote</h3><p>We establish what is needed and explain the work before it starts.</p></div></li>
+          <li class="process-step reveal reveal-delay-2"><span>03</span><div><h3>We do the work</h3><p>The job is completed with attention to quality, safety and your property.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="coverage-section" id="coverage" aria-labelledby="coverage-title">
+      <div class="container coverage-inner reveal">
+        <div><span class="kicker">Service area</span><h2 id="coverage-title">Plett is home base.<br><span>The Garden Route is the reach.</span></h2></div>
+        <div class="coverage-list" aria-label="Service locations">
+          <span>Plettenberg Bay</span><span>Knysna</span><span>Bitou Municipality</span><span>Keurboomstrand</span><span>Natures Valley</span><span>The Crags</span><span>Garden Route</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section proof-section" aria-labelledby="proof-title">
+      <div class="container">
+        <div class="proof-banner reveal">
+          <div><span class="kicker">Built around service</span><h2 id="proof-title">Good trade work should feel<br><span>straightforward.</span></h2></div>
+          <div class="proof-points"><div><strong>Fast</strong><span>response</span></div><div><strong>Clear</strong><span>communication</span></div><div><strong>Careful</strong><span>finish</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div class="contact-copy reveal">
+          <span class="kicker">Get in touch</span>
+          <h2 id="contact-title">Let's get the<br><span>job moving.</span></h2>
+          <p>For urgent issues, call or WhatsApp. For planned work, use the form and give us as much detail as you can.</p>
+          <div class="contact-direct">
+            <a href="tel:0825098950"><span>Phone</span><strong>082 509 8950</strong><small>Tap to call</small></a>
+            <a href="mailto:blessingsibanda30@gmail.com"><span>Email</span><strong>blessingsibanda30@gmail.com</strong><small>Send an enquiry</small></a>
+          </div>
+          <a class="whatsapp-button" href="https://wa.me/27825098950?text=Hi%20BL%26N%2C%20I%27d%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer">WhatsApp BL&amp;N <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="quote-card reveal reveal-delay-1">
+          <div class="quote-card-head"><div><span class="kicker">Quote request</span><h3>Tell us what is happening.</h3></div><span class="quote-badge">Free enquiry</span></div>
+          <form name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="quote-form" id="quote-form">
+            <input type="hidden" name="form-name" value="quote">
+            <p class="honeypot"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            <div class="field-grid">
+              <div class="field"><label for="name">Name *</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required></div>
+              <div class="field"><label for="phone">Phone *</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="082 000 0000" required></div>
+            </div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+            <div class="field"><label for="service">Service *</label><select id="service" name="service" required><option value="" selected disabled>Select one</option><option>Electrical</option><option>Plumbing</option><option>Property maintenance</option><option>CoC</option><option>Not sure</option></select></div>
+            <div class="field"><label for="message">What needs doing? *</label><textarea id="message" name="message" rows="5" maxlength="1500" placeholder="A short description of the problem or work you need..." required></textarea></div>
+            <div class="form-foot"><p>By sending this form you are requesting contact from BL&amp;N about your enquiry.</p><button class="button" type="submit">Send quote request <span aria-hidden="true">↗</span></button></div>
+            <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a class="brand" href="#top"><span class="brand-mark"><img src="assets/logo_w.png" alt="" width="38" height="38" aria-hidden="true"></span><span class="brand-copy"><strong>BL<span>&amp;</span>N</strong><small>Electrical &amp; Plumbing</small></span></a><p>Electrical, plumbing and property maintenance in Plettenberg Bay and surrounding areas.</p></div>
+      <nav aria-label="Footer navigation"><strong>Navigate</strong><a href="#services">Services</a><a href="#about">Why BL&amp;N</a><a href="#process">How it works</a><a href="#coverage">Areas</a><a href="#contact">Contact</a></nav>
+      <address><strong>Contact</strong><a href="tel:0825098950">082 509 8950</a><a href="mailto:blessingsibanda30@gmail.com">blessingsibanda30@gmail.com</a><span>Plettenberg Bay<br>Western Cape, South Africa</span></address>
     </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> BL&amp;N Electrical &amp; Plumbing</span><span>Designed for speed, clarity and action.</span></div>
+  </footer>
+
+  <div class="mobile-action-bar" aria-label="Quick contact actions">
+    <a href="tel:0825098950">Call</a><a href="https://wa.me/27825098950?text=Hi%20BL%26N%2C%20I%27d%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="#contact">Quote</a>
   </div>
-</footer>
 
-<!-- WhatsApp FAB -->
-<a href="https://wa.me/27825098950?text=Hi%2C%20I%27d%20like%20to%20request%20a%20quote."
-   target="_blank" rel="noopener noreferrer"
-   class="whatsapp-fab"
-   aria-label="Chat with us on WhatsApp">
-  <svg width="28" height="28" fill="white" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
+  <a class="floating-whatsapp" href="https://wa.me/27825098950?text=Hi%20BL%26N%2C%20I%27d%20like%20to%20request%20a%20quote." target="_blank" rel="noopener noreferrer" aria-label="Chat with BL&N on WhatsApp"><span aria-hidden="true">WA</span></a>
 
-<!-- ══════════════════════ JSON-LD STRUCTURED DATA ══════════════════════ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://bl-n-site.netlify.app/#business",
-  "name": "BL&N Electrical & Plumbing",
-  "description": "Professional electrical repairs, plumbing services and property maintenance in Plettenberg Bay. Fast response, transparent pricing, and locally trusted tradespeople.",
-  "url": "https://bl-n-site.netlify.app/",
-  "telephone": "+27825098950",
-  "email": "blessingsibanda30@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Plettenberg Bay",
-    "addressRegion": "Western Cape",
-    "addressCountry": "ZA"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "-34.0523",
-    "longitude": "23.3722"
-  },
-  "areaServed": [
-    { "@type": "City", "name": "Plettenberg Bay" },
-    { "@type": "City", "name": "Knysna" },
-    { "@type": "AdministrativeArea", "name": "Bitou Municipality" },
-    { "@type": "AdministrativeArea", "name": "Garden Route" }
-  ],
-  "priceRange": "$$",
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-      "opens": "07:00",
-      "closes": "17:00"
-    }
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Electrical & Plumbing Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Electrical Repairs",
-          "description": "Fault finding, rewiring, DB board upgrades, geyser connections, outdoor lighting, and CoC certificates."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Plumbing Services",
-          "description": "Leak repairs, burst pipes, toilet and tap replacements, drain blockages, and geyser installations."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Property Maintenance",
-          "description": "Ongoing maintenance plans for homeowners, holiday rentals, and estates."
-        }
-      }
-    ]
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LocalBusiness",
+    "@id":"https://bl-n-site.netlify.app/#business",
+    "name":"BL&N Electrical & Plumbing",
+    "url":"https://bl-n-site.netlify.app/",
+    "telephone":"+27825098950",
+    "email":"blessingsibanda30@gmail.com",
+    "description":"Electrical repairs, plumbing services and property maintenance in Plettenberg Bay and surrounding areas.",
+    "address":{"@type":"PostalAddress","addressLocality":"Plettenberg Bay","addressRegion":"Western Cape","addressCountry":"ZA"},
+    "areaServed":["Plettenberg Bay","Knysna","Bitou Municipality","Keurboomstrand","Natures Valley","The Crags","Garden Route"],
+    "hasOfferCatalog":{"@type":"OfferCatalog","name":"BL&N Services","itemListElement":[
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Electrical Repairs & Installations"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Plumbing Repairs & Installations"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Property Maintenance"}}
+    ]}
   }
-}
-</script>
-
-<!-- ══════════════════════ SCRIPTS ══════════════════════ -->
-<script>
-(function () {
-  'use strict';
-
-  /* ── Dynamic year in footer ── */
-  const yrEl = document.getElementById('yr');
-  if (yrEl) yrEl.textContent = new Date().getFullYear();
-
-  /* ── Navbar scroll ── */
-  const navbar = document.getElementById('navbar');
-  let ticking = false;
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(function () {
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  /* ── Hamburger menu ── */
-  const hamBtn     = document.getElementById('ham-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  hamBtn.addEventListener('click', function () {
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamBtn.classList.toggle('active', isOpen);
-    hamBtn.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  document.querySelectorAll('.mobile-link').forEach(function (link) {
-    link.addEventListener('click', function () {
-      mobileMenu.classList.remove('open');
-      hamBtn.classList.remove('active');
-      hamBtn.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  /* ── Scroll reveal (IntersectionObserver) ── */
-  var revealObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function (el) {
-    revealObserver.observe(el);
-  });
-
-  /* ── Stat counters ── */
-  var statObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var el     = entry.target;
-      var target = parseInt(el.dataset.target, 10);
-      var suffix = el.dataset.suffix || '';
-      var count  = 0;
-      var step   = Math.max(1, Math.ceil(target / 55));
-      var timer  = setInterval(function () {
-        count = Math.min(count + step, target);
-        el.textContent = count + suffix;
-        if (count >= target) clearInterval(timer);
-      }, 28);
-      statObserver.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-
-  document.querySelectorAll('.stat-num').forEach(function (el) {
-    statObserver.observe(el);
-  });
-
-  /* ── Testimonial carousel ── */
-  var current = 0;
-  var TOTAL   = 3;
-  var track   = document.getElementById('testimonial-track');
-  var dots    = document.querySelectorAll('.dot');
-  var autoTimer;
-
-  function goTo(idx) {
-    current = ((idx % TOTAL) + TOTAL) % TOTAL;
-    track.style.transform = 'translateX(-' + (current * (100 / TOTAL)) + '%)';
-    dots.forEach(function (d, i) {
-      var active = i === current;
-      d.classList.toggle('bg-amber-400', active);
-      d.classList.toggle('w-6',          active);
-      d.classList.toggle('bg-white/20',  !active);
-      d.classList.toggle('w-1.5',        !active);
-      d.setAttribute('aria-selected', String(active));
-    });
-  }
-
-  function startAuto() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(function () { goTo(current + 1); }, 6000);
-  }
-
-  document.getElementById('prev-btn').addEventListener('click', function () { goTo(current - 1); startAuto(); });
-  document.getElementById('next-btn').addEventListener('click', function () { goTo(current + 1); startAuto(); });
-  dots.forEach(function (d) {
-    d.addEventListener('click', function () { goTo(parseInt(d.dataset.idx, 10)); startAuto(); });
-  });
-  startAuto();
-
-  /* ── Contact form ── */
-  var form          = document.getElementById('quote-form');
-  var submitBtn     = document.getElementById('submit-btn');
-  var submitText    = document.getElementById('submit-text');
-  var submitLoading = document.getElementById('submit-loading');
-  var formError     = document.getElementById('form-error');
-  var formSuccess   = document.getElementById('form-success');
-
-  function setLoading(state) {
-    submitBtn.disabled     = state;
-    submitText.classList.toggle('hidden', state);
-    submitLoading.classList.toggle('hidden', !state);
-    submitBtn.setAttribute('aria-busy', String(state));
-  }
-
-  function showError(msg) {
-    formError.textContent = msg;
-    formError.classList.remove('hidden');
-    formSuccess.classList.add('hidden');
-    ['fname','fphone','fservice','fmessage'].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el && !el.value.trim()) el.setAttribute('aria-invalid', 'true');
-    });
-  }
-
-  function clearMessages() {
-    formError.classList.add('hidden');
-    formSuccess.classList.add('hidden');
-    formError.textContent = '';
-    form.querySelectorAll('[aria-invalid]').forEach(function (el) {
-      el.removeAttribute('aria-invalid');
-    });
-  }
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    clearMessages();
-
-    var name    = form.querySelector('[name="name"]').value.trim();
-    var phone   = form.querySelector('[name="phone"]').value.trim();
-    var service = form.querySelector('[name="service"]').value;
-    var message = form.querySelector('[name="message"]').value.trim();
-
-    if (!name || !phone || !service || !message) {
-      showError('Please fill in all required fields — Name, Phone, Service Needed, and Job Description.');
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      var response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString(),
-      });
-
-      if (response.ok) {
-        form.reset();
-        formSuccess.classList.remove('hidden');
-        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      } else {
-        throw new Error('Server returned ' + response.status);
-      }
-    } catch (err) {
-      showError('Something went wrong. Please call us directly on 082 509 8950 or email blessingsibanda30@gmail.com.');
-      console.error('Form submission error:', err);
-    } finally {
-      setLoading(false);
-    }
-  });
-
-})();
-</script>
-
+  </script>
 </body>
 </html>
