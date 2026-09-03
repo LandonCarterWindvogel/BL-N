@@ -1,7 +1,4 @@
 /*
-  Security headers for the static Netlify site.
-  Keep the policy intentionally same-origin: no third-party scripts, fonts or frames are required.
-*/
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
