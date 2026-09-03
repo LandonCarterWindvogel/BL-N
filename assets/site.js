@@ -1,6 +1,11 @@
 (() => {
   'use strict';
 
+  const enhancementStylesheet = document.createElement('link');
+  enhancementStylesheet.rel = 'stylesheet';
+  enhancementStylesheet.href = 'assets/viewport-enhancements.css';
+  document.head.appendChild(enhancementStylesheet);
+
   const header = document.getElementById('site-header');
   const menuToggle = document.querySelector('.menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
