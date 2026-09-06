@@ -350,7 +350,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height
   overflow: hidden; box-shadow: var(--shadow-card);
 }
 .work-tile .art {
-  aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   background: linear-gradient(155deg, var(--cobalt) 0%, var(--cobalt-mid) 100%);
 }
 .work-tile .meta { padding: 16px 18px 20px; }
