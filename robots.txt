@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bl-n-site.netlify.app/sitemap.xml
