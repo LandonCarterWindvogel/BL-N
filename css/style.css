@@ -1,4 +1,5 @@
 @import url("./style-base.css");
+@import url("./ui-audit-fix.css");
 
 /*
    BL&N TICKET SYSTEM REFIT
@@ -26,11 +27,7 @@
   inset-inline: 0;
   inset-block-start: 0;
   height: 1px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--line) 0 8px,
-    transparent 8px 15px
-  );
+  background: repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 15px);
   opacity: .9;
 }
 
@@ -40,8 +37,6 @@
   margin-bottom: clamp(34px, 5vw, 58px);
 }
 
-/* Stop the repeated template-looking kicker treatment without removing
-   its useful text from the accessibility tree. */
 .kicker {
   position: relative;
   display: block;
@@ -63,29 +58,12 @@
   height: 2px;
 }
 
-#services .kicker::after {
-  content: "WORK ORDER / 01";
-}
-
-.work-section .kicker::after {
-  content: "FIELD REPORT / 02";
-}
-
-#process .kicker::after {
-  content: "HANDOFF / 03";
-}
-
-#reviews .kicker::after {
-  content: "SERVICE STANDARD / 04";
-}
-
-#faq .kicker::after {
-  content: "INSPECTION SHEET / 05";
-}
-
-#contact .kicker::after {
-  content: "JOB INTAKE / 06";
-}
+#services .kicker::after { content: "WORK ORDER / 01"; }
+.work-section .kicker::after { content: "FIELD REPORT / 02"; }
+#process .kicker::after { content: "HANDOFF / 03"; }
+#reviews .kicker::after { content: "SERVICE STANDARD / 04"; }
+#faq .kicker::after { content: "INSPECTION SHEET / 05"; }
+#contact .kicker::after { content: "JOB INTAKE / 06"; }
 
 .kicker::after {
   font-family: var(--font-mono);
@@ -95,7 +73,6 @@
   text-transform: uppercase;
 }
 
-/* Only the hero ticket gets entrance motion. Everything else is immediate. */
 [data-reveal] {
   opacity: 1 !important;
   transform: none !important;
@@ -107,25 +84,13 @@
 }
 
 @keyframes ticket-arrival {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 34px, 0) rotate(1.2deg) !important;
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) rotate(0) !important;
-  }
+  from { opacity: 0; transform: translate3d(0, 34px, 0) rotate(1.2deg) !important; }
+  to { opacity: 1; transform: translate3d(0, 0, 0) rotate(0) !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero .ticket[data-reveal] {
-    animation: none !important;
-  }
+  .hero .ticket[data-reveal] { animation: none !important; }
 }
-
-/* ─────────────────────────────
-   Hero ticket becomes the master visual cue
-───────────────────────────── */
 
 .ticket {
   position: relative;
@@ -149,10 +114,6 @@
   line-height: 1;
 }
 
-/* ─────────────────────────────
-   Services = work-order cards
-───────────────────────────── */
-
 .service-grid {
   counter-reset: service-order;
   gap: 18px;
@@ -165,8 +126,7 @@
   border-radius: 2px;
   border: 1px solid var(--line);
   box-shadow: 0 1px 0 rgba(18, 24, 43, .03);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
 }
 
 .service-card::before {
@@ -189,11 +149,7 @@
   inset-inline: 16px;
   inset-block-start: 34px;
   height: 1px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--amber) 0 22px,
-    transparent 22px 29px
-  );
+  background: repeating-linear-gradient(90deg, var(--amber) 0 22px, transparent 22px 29px);
   opacity: .75;
 }
 
@@ -206,349 +162,62 @@
   background: var(--paper-dim);
 }
 
-.service-card h3 {
-  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
-}
+.service-card h3 { font-size: clamp(1.25rem, 2.5vw, 1.55rem); }
+.service-card ul { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 14px; }
+.service-card li { position: relative; padding-inline-start: 18px; }
+.service-card li::before { content: "✓"; position: absolute; inset-inline-start: 0; color: var(--cobalt); font-family: var(--font-mono); font-size: 11px; }
+.callout-strip { border-radius: 2px; border-inline-start: 4px solid var(--amber); box-shadow: var(--ticket-shadow); }
 
-.service-card ul {
-  border-top: 1px solid var(--line);
-  margin-top: 22px;
-  padding-top: 14px;
-}
+.work-grid { gap: 20px; }
+.work-tile { border-radius: 2px; border: 1px solid var(--line); box-shadow: 0 14px 34px -26px rgba(18, 24, 43, .48); overflow: hidden; background: var(--white); }
+.work-tile .art { position: relative; }
+.work-tile .art::before { content: "FIELD PHOTO"; position: absolute; z-index: 2; inset-inline-start: 12px; inset-block-start: 12px; padding: 5px 7px; background: rgba(0, 28, 87, .9); color: var(--amber); font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; }
+.work-tile .meta { position: relative; padding-top: 22px; }
+.work-tile .meta::before { content: "OBSERVATION"; display: block; margin-bottom: 8px; color: var(--cobalt); font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; }
 
-.service-card li {
-  position: relative;
-  padding-inline-start: 18px;
-}
-
-.service-card li::before {
-  content: "✓";
-  position: absolute;
-  inset-inline-start: 0;
-  color: var(--cobalt);
-  font-family: var(--font-mono);
-  font-size: 11px;
-}
-
-.callout-strip {
-  border-radius: 2px;
-  border-inline-start: 4px solid var(--amber);
-  box-shadow: var(--ticket-shadow);
-}
-
-/* ─────────────────────────────
-   On-the-job imagery = field reports
-───────────────────────────── */
-
-.work-grid {
-  gap: 20px;
-}
-
-.work-tile {
-  border-radius: 2px;
-  border: 1px solid var(--line);
-  box-shadow: 0 14px 34px -26px rgba(18, 24, 43, .48);
-  overflow: hidden;
-  background: var(--white);
-}
-
-.work-tile .art {
-  position: relative;
-}
-
-.work-tile .art::before {
-  content: "FIELD PHOTO";
-  position: absolute;
-  z-index: 2;
-  inset-inline-start: 12px;
-  inset-block-start: 12px;
-  padding: 5px 7px;
-  background: rgba(0, 28, 87, .9);
-  color: var(--amber);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .1em;
-}
-
-.work-tile .meta {
-  position: relative;
-  padding-top: 22px;
-}
-
-.work-tile .meta::before {
-  content: "OBSERVATION";
-  display: block;
-  margin-bottom: 8px;
-  color: var(--cobalt);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .1em;
-}
-
-/* ─────────────────────────────
-   Process = handoff docket
-───────────────────────────── */
-
-.process-section {
-  background: var(--paper-dim);
-}
-
-.process-wrap > :first-child {
-  position: relative;
-}
-
-.process-wrap > :first-child::after {
-  content: "WORKFLOW / 03";
-  position: absolute;
-  inset-inline-end: 0;
-  inset-block-start: 0;
-  color: rgba(0, 48, 143, .28);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .1em;
-}
-
-.steps {
-  position: relative;
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  background: var(--white);
-  box-shadow: var(--ticket-shadow);
-}
-
+.process-section { background: var(--paper-dim); }
+.process-wrap > :first-child { position: relative; }
+.process-wrap > :first-child::after { content: "WORKFLOW / 03"; position: absolute; inset-inline-end: 0; inset-block-start: 0; color: rgba(0, 48, 143, .28); font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; }
+.steps { position: relative; border: 1px solid var(--line); border-radius: 2px; background: var(--white); box-shadow: var(--ticket-shadow); }
 .steps::before,
-.contact-form-card::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  inset-block-start: 0;
-  height: 7px;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0 10px,
-    var(--amber) 10px 18px,
-    transparent 18px 27px
-  );
-  opacity: .8;
-}
+.contact-form-card::before { content: ""; position: absolute; inset-inline: 0; inset-block-start: 0; height: 7px; background: repeating-linear-gradient(90deg, transparent 0 10px, var(--amber) 10px 18px, transparent 18px 27px); opacity: .8; }
+.steps h2 { font-size: clamp(1.45rem, 3vw, 2rem); letter-spacing: -.02em; }
+.step-num { border-radius: 2px !important; font-family: var(--font-mono); box-shadow: 0 0 0 5px var(--white), 0 0 0 6px var(--line); }
 
-.steps h2 {
-  font-size: clamp(1.45rem, 3vw, 2rem);
-  letter-spacing: -.02em;
-}
+.coverage { position: relative; overflow: hidden; }
+.coverage::before { content: "DISPATCH / ROUTE COVERAGE"; position: absolute; inset-inline-end: max(20px, calc((100vw - var(--max)) / 2)); inset-block-start: 26px; color: rgba(246, 182, 60, .6); font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; }
+.coverage-inner { border-radius: 2px; border: 1px solid rgba(255, 255, 255, .14); box-shadow: 0 24px 54px -34px rgba(0, 28, 87, .8); }
+.area-pill { border-radius: 2px !important; font-family: var(--font-mono); letter-spacing: .02em; }
+.area-pill::before { content: "// "; color: var(--amber); }
 
-.step-num {
-  border-radius: 2px !important;
-  font-family: var(--font-mono);
-  box-shadow: 0 0 0 5px var(--white), 0 0 0 6px var(--line);
-}
+#reviews .section-head h2 { max-width: 15ch; }
+.testi-scroller { gap: 16px; }
+.testi-card { position: relative; border-radius: 2px; border: 1px solid var(--line); background: var(--white); box-shadow: 0 12px 30px -26px rgba(18, 24, 43, .55); }
+.testi-card::before { content: "STANDARD"; display: block; margin-bottom: 18px; color: var(--cobalt); font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; }
+.testi-stars { position: absolute; inset-inline-end: 18px; inset-block-start: 18px; color: var(--amber) !important; }
+.testi-avatar { border-radius: 2px !important; background: var(--cobalt) !important; color: var(--amber) !important; font-family: var(--font-mono); }
 
-/* ─────────────────────────────
-   Coverage = dispatch board
-───────────────────────────── */
+#faq { background: linear-gradient(rgba(18,24,43,.025) 1px, transparent 1px), var(--paper); background-size: 100% 36px; }
+#faq .section-head h2 { max-width: 12ch; }
+.faq-list { position: relative; border-block: 2px solid var(--ink); background: rgba(251, 249, 244, .9); }
+.faq-list::before { content: "INSPECTION / QUESTIONS & ANSWERS"; display: block; padding: 14px 18px; border-bottom: 1px dashed var(--ticket-rule); color: var(--cobalt); font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; }
+.faq-item { border-bottom: 1px dashed var(--ticket-rule); }
+.faq-item:last-child { border-bottom: 0; }
+.faq-item summary { font-family: var(--font-display); }
+.faq-item summary::marker { color: var(--cobalt); }
+.faq-plus { border-radius: 2px !important; }
 
-.coverage {
-  position: relative;
-  overflow: hidden;
-}
-
-.coverage::before {
-  content: "DISPATCH / ROUTE COVERAGE";
-  position: absolute;
-  inset-inline-end: max(20px, calc((100vw - var(--max)) / 2));
-  inset-block-start: 26px;
-  color: rgba(246, 182, 60, .6);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .12em;
-}
-
-.coverage-inner {
-  border-radius: 2px;
-  border: 1px solid rgba(255, 255, 255, .14);
-  box-shadow: 0 24px 54px -34px rgba(0, 28, 87, .8);
-}
-
-.area-pill {
-  border-radius: 2px !important;
-  font-family: var(--font-mono);
-  letter-spacing: .02em;
-}
-
-.area-pill::before {
-  content: "// ";
-  color: var(--amber);
-}
-
-/* ─────────────────────────────
-   Why BL&N = service standards, not fake testimonials
-───────────────────────────── */
-
-#reviews .section-head h2 {
-  max-width: 15ch;
-}
-
-.testi-scroller {
-  gap: 16px;
-}
-
-.testi-card {
-  position: relative;
-  border-radius: 2px;
-  border: 1px solid var(--line);
-  background: var(--white);
-  box-shadow: 0 12px 30px -26px rgba(18, 24, 43, .55);
-}
-
-.testi-card::before {
-  content: "STANDARD";
-  display: block;
-  margin-bottom: 18px;
-  color: var(--cobalt);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: .1em;
-}
-
-.testi-stars {
-  position: absolute;
-  inset-inline-end: 18px;
-  inset-block-start: 18px;
-  color: var(--amber) !important;
-}
-
-.testi-avatar {
-  border-radius: 2px !important;
-  background: var(--cobalt) !important;
-  color: var(--amber) !important;
-  font-family: var(--font-mono);
-}
-
-/* ─────────────────────────────
-   FAQ = inspection sheet
-───────────────────────────── */
-
-#faq {
-  background:
-    linear-gradient(rgba(18,24,43,.025) 1px, transparent 1px),
-    var(--paper);
-  background-size: 100% 36px;
-}
-
-#faq .section-head h2 {
-  max-width: 12ch;
-}
-
-.faq-list {
-  position: relative;
-  border-block: 2px solid var(--ink);
-  background: rgba(251, 249, 244, .9);
-}
-
-.faq-list::before {
-  content: "INSPECTION / QUESTIONS & ANSWERS";
-  display: block;
-  padding: 14px 18px;
-  border-bottom: 1px dashed var(--ticket-rule);
-  color: var(--cobalt);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .1em;
-}
-
-.faq-item {
-  border-bottom: 1px dashed var(--ticket-rule);
-}
-
-.faq-item:last-child {
-  border-bottom: 0;
-}
-
-.faq-item summary {
-  font-family: var(--font-display);
-}
-
-.faq-item summary::marker {
-  color: var(--cobalt);
-}
-
-.faq-plus {
-  border-radius: 2px !important;
-}
-
-/* ─────────────────────────────
-   Contact = job intake
-───────────────────────────── */
-
-#contact {
-  background: var(--cobalt-deep);
-  color: var(--white);
-}
-
-#contact::before {
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(255,255,255,.15) 0 8px,
-    transparent 8px 15px
-  );
-}
-
-#contact .kicker,
-#contact .section-head p,
-#contact .info-row p {
-  color: rgba(255,255,255,.68);
-}
-
-#contact .section-head h2 {
-  max-width: 12ch;
-}
-
-.contact-grid {
-  position: relative;
-  align-items: stretch;
-}
-
-.contact-form-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 2px;
-  box-shadow: 0 26px 58px -34px rgba(0, 0, 0, .55);
-}
-
-#contact .info-row {
-  border-bottom-color: rgba(255,255,255,.12);
-}
-
-/* ─────────────────────────────
-   Mobile tuning
-───────────────────────────── */
+#contact { background: var(--cobalt-deep); color: var(--white); }
+#contact::before { background: repeating-linear-gradient(90deg, rgba(255,255,255,.15) 0 8px, transparent 8px 15px); }
+#contact .kicker, #contact .section-head p, #contact .info-row p { color: rgba(255,255,255,.68); }
+#contact .section-head h2 { max-width: 12ch; }
+.contact-grid { position: relative; align-items: stretch; }
+.contact-form-card { position: relative; overflow: hidden; border-radius: 2px; box-shadow: 0 26px 58px -34px rgba(0, 0, 0, .55); }
+#contact .info-row { border-bottom-color: rgba(255,255,255,.12); }
 
 @media (max-width: 639px) {
-  .section-head::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 1px;
-    margin-top: 24px;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--line) 0 8px,
-      transparent 8px 15px
-    );
-  }
-
-  .process-wrap > :first-child::after {
-    display: none;
-  }
-
-  .coverage::before {
-    inset-inline-end: 20px;
-  }
-
-  .ticket::after {
-    inset-inline-end: 10px;
-    font-size: 8px;
-  }
+  .section-head::after { content: ""; display: block; width: 100%; height: 1px; margin-top: 24px; background: repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 15px); }
+  .process-wrap > :first-child::after { display: none; }
+  .coverage::before { inset-inline-end: 20px; }
+  .ticket::after { inset-inline-end: 10px; font-size: 8px; }
 }
-
-/* Keep the original mobile navigation and form controls untouched. */
