@@ -2431,6 +2431,12 @@ h5 {
     rgba(37, 211, 102, .65);
 }
 
+.fab-whatsapp img {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
 /* ─────────────────────────────
    Scroll Reveal
 ───────────────────────────── */
